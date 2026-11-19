@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#254d89">
+<title>LabObserve — Uji Koneksi Supabase</title>
+<style>
+:root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#183654;background:#f1f5fb}*{box-sizing:border-box}body{margin:0}button,input{font:inherit}button{cursor:pointer}header{background:#234b89;color:white;padding:18px max(22px,calc((100vw - 950px)/2));display:flex;align-items:center;justify-content:space-between;gap:15px}.brand{font-weight:800;font-size:21px}.brand small{display:block;font-size:11px;font-weight:500;color:#d9e8ff}.tag{border-radius:100px;background:#e7f0ff;color:#1b4581;font-size:12px;font-weight:700;padding:5px 11px}header .tag{color:white;background:#ffffff26}main{max-width:960px;margin:25px auto 90px;padding:0 18px}h1{font-size:26px;color:#183e76;margin:0 0 9px}h2{font-size:19px;color:#214b83;margin:0 0 12px}p{line-height:1.6;color:#506783;margin:8px 0 15px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}.paper{padding:26px;border-radius:16px;background:white;border:1px solid #dce6f4;box-shadow:0 8px 24px #183e7612;margin:16px 0}.note{border:1px solid #cadcf5;background:#f0f6ff;color:#264c7d;border-radius:11px;padding:14px;margin:12px 0;line-height:1.6;font-size:13px}.warn{background:#fff7eb;border-color:#f3dab4;color:#85580d}.status{border-radius:10px;background:#edf3fd;padding:10px 12px;margin:10px 0;color:#30588d;font-size:13px;line-height:1.5;white-space:pre-wrap}.status.ok{background:#e9f7ef;color:#165b3d}.status.err{background:#ffefef;color:#8f3131}.hidden{display:none!important}.field{margin:12px 0}.field label{display:block;margin-bottom:6px;font-weight:650;color:#315273;font-size:13px}.field input{width:100%;border:1px solid #c6d6ed;background:#fff;border-radius:9px;padding:12px 12px;min-height:44px;outline:none}.field input:focus{border-color:#3474d0;box-shadow:0 0 0 3px #dfeeff}.btn{background:#2458a5;color:white;border:1px solid #2458a5;border-radius:9px;padding:11px 15px;font-weight:700;min-height:43px}.btn:hover{background:#1b4687}.btn:disabled{opacity:.5;cursor:not-allowed}.btn.alt{background:#fff;color:#2458a5;border-color:#a7bee0}.btn.alt:hover{background:#f2f6fc}.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}.result{border:1px solid #9cc7af;background:#f0faf4;border-radius:12px;padding:15px;color:#1d5c39;line-height:1.55}.result b{color:#16482c}.code{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;font-size:15px;font-weight:750;word-break:break-all;color:#193f6c;background:white;border:1px solid #dae5f4;border-radius:8px;padding:10px;margin:6px 0}.helper{font-size:12px;color:#667d9b}ol{line-height:1.7;padding-left:21px;color:#4b6484}@media(max-width:680px){.grid{grid-template-columns:1fr}.paper{padding:18px}h1{font-size:22px}header{padding:16px 20px}.brand{font-size:19px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+</head>
+<body>
+<header><div class="brand">⚗ LabObserve<small>Tes koneksi kelompok ke Supabase</small></div><span class="tag">Academic Blue</span></header>
+<main>
+<h1>LabObserve terhubung ke Supabase</h1>
+<p>Halaman ini khusus untuk <strong>mengecek sistem Buat Kelompok dan Gabung Kelompok</strong>. Website utama <code>index.html</code> tidak berubah. Setelah tes berhasil, koneksi ini bisa dipindahkan ke instrumen lengkap.</p>
+<div class="note warn"><strong>Keamanan:</strong> file ini hanya berisi publishable key publik. Jangan pernah menaruh service_role, secret key, password database, atau Google Client Secret di GitHub Pages.</div>
+<section class="paper">
+  <h2>1. Koneksi Supabase sudah dikonfigurasi</h2>
+  <p>Project URL dan publishable key sudah terpasang di file ini. Tidak perlu menyalin atau mengetik kunci lagi.</p>
+  <div class="note"><strong>Proyek:</strong> qlxmkkqstokefnwdqdfy.supabase.co<br><strong>Login:</strong> anonim, tanpa email untuk anggota.</div>
+  <form id="configForm">
+    <div class="row"><button id="connect" class="btn" type="submit">Coba hubungkan ulang</button></div>
+  </form>
+  <div id="connectStatus" class="status">Menghubungkan ke Supabase...</div>
+  <p class="helper">Koneksi otomatis dicoba saat halaman dibuka. Hanya publishable key (kunci publik) yang disertakan; jangan memasukkan service_role, secret key, atau password database dalam file HTML.</p>
+</section>
+<div id="workspace" class="hidden">
+<div class="grid">
+  <section class="paper"><h2>2A. Buat Kelompok (Ketua)</h2>
+    <form id="createForm">
+      <div class="field"><label for="groupName">Nama kelompok</label><input id="groupName" value="Kelompok Observasi" minlength="2" maxlength="100" required></div>
+      <div class="field"><label for="schoolName">Sekolah</label><input id="schoolName" placeholder="Contoh: SMA Negeri X" minlength="2" maxlength="180" required></div>
+      <div class="field"><label for="leaderName">Nama ketua</label><input id="leaderName" placeholder="Nama kamu" minlength="2" maxlength="70" required></div>
+      <button class="btn" type="submit">Buat Kelompok</button>
+    </form>
+    <div id="createStatus" class="status">Belum membuat kelompok.</div>
+    <div id="createResult" class="hidden result">
+      <b>Kelompok berhasil dibuat di Supabase!</b>
+      <div>Kode untuk anggota:</div><div id="groupCode" class="code"></div>
+      <div>Kode pemulihan ketua (muncul sekali):</div><div id="leaderCode" class="code"></div>
+      <div class="row"><button id="copyGroup" type="button" class="btn alt">Salin kode kelompok</button><button id="copyLeader" type="button" class="btn alt">Salin kode ketua</button></div>
+      <p class="helper">Simpan kode ketua di tempat aman. Jangan sebarkan kepada anggota biasa. Buka tab samaran/perangkat lain untuk menguji kode kelompok.</p>
+    </div>
+  </section>
+  <section class="paper"><h2>2B. Gabung Kelompok (Anggota)</h2>
+    <form id="joinForm">
+      <div class="field"><label for="joinCode">Kode kelompok</label><input id="joinCode" placeholder="LAB-..." required></div>
+      <div class="field"><label for="memberName">Nama anggota</label><input id="memberName" placeholder="Nama temanmu" minlength="2" maxlength="70" required></div>
+      <div class="field"><label for="recoverCode">Kode ketua (opsional)</label><input id="recoverCode" placeholder="Kosongkan jika anggota biasa" autocomplete="off"></div>
+      <button class="btn" type="submit">Gabung Kelompok</button>
+    </form>
+    <div id="joinStatus" class="status">Belum bergabung.</div>
+  </section>
+</div>
+<section id="detail" class="paper hidden">
+  <h2>3. Data kelompok yang dibaca dari Supabase</h2>
+  <p class="helper">Muncul setelah Buat/Gabung berhasil. Ini membuktikan data anggota bisa dibaca sesuai izin RLS.</p>
+  <div id="groupInfo" class="status"></div>
+  <div class="row"><button id="refresh" type="button" class="btn alt">Muat ulang anggota</button></div>
+  <div id="memberStatus" class="status"></div>
+  <ol id="members"></ol>
+</section>
+</div>
+<section class="paper"><h2>Setelah tes berhasil</h2><p>Kita bisa mengintegrasikan login kelompok yang sudah berfungsi ke LabObserve utama, kemudian menghubungkan jawaban dan wawancara ke tabel <code>question_answers</code>. Foto dan video ke Google Drive dikerjakan pada tahap berikutnya.</p><p class="helper">Fitur upload Drive, penyimpanan checklist, mode offline sinkron, dan ekspor DOCX/PPTX belum diaktifkan oleh halaman pengujian ini.</p></section>
+</main>
+<script>
+'use strict';
+const $=s=>document.querySelector(s);
+const SUPABASE_URL='https://qlxmkkqstokefnwdqdfy.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY='sb_publishable_dIKRzVYlzXWK3UfUwuCnAQ_aEafBzsb';
+let client=null, currentGroupId=null, currentGroupName=null, currentRole=null, lastGroupCode='', lastLeaderCode='';
+function message(selector,msg,kind=''){const el=$(selector);el.textContent=msg;el.className='status'+(kind?' '+kind:'');}
+function busy(form,b){const el=form.querySelector('button[type="submit"]');el.disabled=b;el.textContent=b?'Memproses...':(form.id==='configForm'?'Coba hubungkan ulang':form.id==='createForm'?'Buat Kelompok':'Gabung Kelompok');}
+function cleanError(e){const msg=String(e?.message||e||'Kesalahan tidak diketahui');if(/anonymous|disabled/i.test(msg))return msg+'\nPastikan Anonymous Sign-ins sudah ON di Supabase > Authentication > Providers.';if(/Invalid API key|invalid JWT|apikey/i.test(msg))return msg+'\nPeriksa Publishable Key, bukan secret key.';if(/permission denied|not allowed|42501/i.test(msg))return msg+'\nPeriksa izin RPC dan RLS Supabase.';return msg}
+async function signIn(){const {data:{session},error:sessionError}=await client.auth.getSession();if(sessionError)throw sessionError;if(session?.user)return session.user;const {data,error}=await client.auth.signInAnonymously();if(error)throw error;return data.user}
+$('#configForm').addEventListener('submit',async e=>{e.preventDefault();const form=e.currentTarget;busy(form,true);$('#workspace').classList.add('hidden');$('#detail').classList.add('hidden');try{if(!window.supabase?.createClient)throw new Error('Library Supabase belum termuat. Pastikan internet aktif dan CDN dapat diakses.');const url=SUPABASE_URL;const key=SUPABASE_PUBLISHABLE_KEY;if(!/^https:\/\/[a-z0-9.-]+\.supabase\.co$/i.test(url))throw new Error('URL harus berupa alamat proyek Supabase https://...supabase.co');if(!(key.startsWith('sb_publishable_')||key.startsWith('eyJ')))throw new Error('Gunakan Publishable Key atau legacy anon key, bukan secret key.');client=window.supabase.createClient(url,key);const user=await signIn();message('#connectStatus','Terhubung! Sesi pengguna: '+user.id+'\nSekarang coba Buat Kelompok atau Gabung Kelompok.','ok');$('#workspace').classList.remove('hidden');}catch(err){message('#connectStatus','Koneksi gagal: '+cleanError(err),'err')}finally{busy(form,false)}});
+
+async function showGroup(groupId,groupName,role){currentGroupId=groupId;currentGroupName=groupName;currentRole=role;$('#detail').classList.remove('hidden');$('#groupInfo').textContent=`Nama: ${groupName}\nPeran di perangkat ini: ${role}\nID kelompok: ${groupId}`;await refreshMembers()}
+async function refreshMembers(){if(!client||!currentGroupId)return;message('#memberStatus','Memuat anggota...');const {data,error}=await client.from('group_members').select('display_name,member_role,joined_at').eq('group_id',currentGroupId).order('joined_at',{ascending:true});if(error){message('#memberStatus','Gagal membaca anggota: '+cleanError(error),'err');return}$('#members').replaceChildren();for(const m of data||[]){const li=document.createElement('li');li.textContent=`${m.display_name} (${m.member_role==='leader'?'Ketua':'Anggota'})`;$('#members').appendChild(li)}message('#memberStatus',`Berhasil membaca ${data?.length||0} anggota dari database.`, 'ok')}
+$('#refresh').addEventListener('click',refreshMembers);
+$('#createForm').addEventListener('submit',async e=>{e.preventDefault();if(!client){message('#createStatus','Hubungkan dulu ke Supabase.','err');return}const form=e.currentTarget;busy(form,true);$('#createResult').classList.add('hidden');try{await signIn();const {data,error}=await client.rpc('create_observation_group',{p_group_name:$('#groupName').value.trim(),p_school_name:$('#schoolName').value.trim(),p_display_name:$('#leaderName').value.trim()});if(error)throw error;const row=data?.[0];if(!row?.group_id)throw new Error('Respons Buat Kelompok tidak sesuai.');lastGroupCode=row.group_code;lastLeaderCode=row.leader_code;$('#groupCode').textContent=lastGroupCode;$('#leaderCode').textContent=lastLeaderCode;$('#joinCode').value=lastGroupCode;$('#createResult').classList.remove('hidden');message('#createStatus','Berhasil! Kelompok sudah tersimpan di Supabase.','ok');await showGroup(row.group_id,$('#groupName').value.trim(),'leader')}catch(err){message('#createStatus','Gagal membuat kelompok: '+cleanError(err),'err')}finally{busy(form,false)}});
+$('#joinForm').addEventListener('submit',async e=>{e.preventDefault();if(!client){message('#joinStatus','Hubungkan dulu ke Supabase.','err');return}const form=e.currentTarget;busy(form,true);try{await signIn();const {data,error}=await client.rpc('join_observation_group',{p_group_code:$('#joinCode').value.trim().toUpperCase(),p_display_name:$('#memberName').value.trim(),p_leader_code:$('#recoverCode').value.trim()||null});if(error)throw error;const row=data?.[0];if(!row?.group_id)throw new Error('Respons Gabung Kelompok tidak sesuai.');message('#joinStatus',`Berhasil masuk ke ${row.group_name} sebagai ${row.member_role}.`, 'ok');await showGroup(row.group_id,row.group_name,row.member_role)}catch(err){message('#joinStatus','Gagal bergabung: '+cleanError(err),'err')}finally{busy(form,false)}});
+$('#copyGroup').addEventListener('click',()=>navigator.clipboard?.writeText(lastGroupCode).then(()=>alert('Kode kelompok tersalin.')).catch(()=>alert('Salin kode kelompok secara manual.')));
+$('#copyLeader').addEventListener('click',()=>navigator.clipboard?.writeText(lastLeaderCode).then(()=>alert('Kode ketua tersalin.')).catch(()=>alert('Salin kode ketua secara manual.')));
+// Mulai autentikasi anonim otomatis. Jika gagal, gunakan tombol 'Coba hubungkan ulang'.
+$('#configForm').requestSubmit();
+</script>
+</body>
+</html>
+
