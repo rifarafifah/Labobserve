@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#244a87">
-  <title>LabObserve — Observasi, Dokumentasi & Laporan</title>
+  <title>LabObserve — Instrumen Observasi Kolaboratif</title>
   <style>
     :root{font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:#1d3353;background:#edf3fb;--navy:#244a87;--royal:#2b65b9;--sky:#edf4ff;--edge:#d8e3f2;--muted:#617793;--paper:#fff;--good:#177251;--warn:#a66610;--bad:#b33d40}
     *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0}input,select,textarea,button{font:inherit}button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.52}a{color:var(--royal)}
@@ -47,6 +47,93 @@
       body.report-print .report-pages{max-width:none!important;box-shadow:none!important;margin:0!important;padding:0!important;font-size:12pt!important;line-height:1.55!important}
       body.report-print .report-pages p{orphans:3;widows:3}
     }
+
+/* Tampilan instrumen dipulihkan ke gaya dokumen Academic Blue awal.
+   Penyesuaian bersifat visual: model data Supabase dan laporan naratif tidak diubah. */
+:root{--v2-navy:#183968;--v2-blue:#2563eb;--v2-line:#dce5f2;--v2-muted:#71819b}
+body{background:#eef3fa;color:#1e304c}
+.topbar{position:sticky;top:0;height:66px;min-height:66px;padding:0 clamp(14px,3vw,30px);background:#fff;color:#183968;border-bottom:1px solid #dce5f2;box-shadow:none;z-index:50}
+.topbar .logo{font-size:18px;color:#183968;letter-spacing:-.4px}
+.topbar .logo .flask{background:#e8f0fd;color:#214a93;border-radius:12px;width:38px;height:38px;font-size:21px}
+.topbar .logo small{font-size:10px;color:#617793;letter-spacing:0}
+.top-info{color:#44618c;font-size:12px}
+.layout{display:grid;grid-template-columns:247px minmax(0,920px);gap:27px;align-items:start;justify-content:center;max-width:1320px;margin:0 auto 90px;padding:25px 20px}
+.sidebar{position:sticky;top:90px;max-height:calc(100vh - 110px);overflow:auto;background:white;border:1px solid #dce5f2;border-radius:16px;padding:16px;box-shadow:none}
+.sidebar .side-head{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#1e497e;font-size:13px}
+.sidebar .navgroup{font-size:10px;color:#8399b5;font-weight:800;letter-spacing:1.1px;margin:17px 0 5px}
+.sidebar .navlink{display:flex;align-items:center;gap:9px;padding:9px 10px;margin:0;border-radius:9px;text-decoration:none;color:#526987;font-size:12px;line-height:1.4}
+.sidebar .navlink:hover{background:#edf4ff;color:#1f4f94}
+.sidebar .navlink .nav-symbol{width:17px;font-size:15px;line-height:1;color:#5376a6;text-align:center;flex:none}
+.sidebar .side-progress{margin-top:16px;background:#f1f6ff;border-radius:13px;padding:13px;color:#1d416f}
+.sidebar .side-progress p{font-size:11px;color:#6380a7;margin:6px 0 0}
+.sidebar .side-divider{height:1px;background:#dce5f2;margin:13px 0}
+.workspace{display:flex;flex-direction:column;gap:18px;min-width:0}
+.workspace>.paper{margin:0;border:1px solid #dce5f2;border-radius:16px;padding:clamp(18px,4vw,42px);box-shadow:0 13px 38px rgba(22,48,93,.075);background:white;scroll-margin-top:95px}
+.document-title{text-align:center;padding:14px 0 27px}
+.document-title .eyebrow{font-size:11px;letter-spacing:1.6px;font-weight:800;color:#416fb3}
+.document-title h1{font-size:clamp(22px,3vw,30px);font-weight:820;line-height:1.22;letter-spacing:-.8px;color:#183968;margin:10px auto;max-width:600px}
+.document-title p{font-size:12px;color:#7f90a9;margin:0}
+.document-divider{height:2px;background:linear-gradient(90deg,transparent,#a9c6f0,transparent);margin:20px 0 26px}
+.workspace .section-head{border-bottom:1px solid #dce7f5;padding-bottom:13px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.workspace .section-head h2,.workspace>.paper h2{font-size:19px;color:#21477f;letter-spacing:-.3px;margin:0}
+.workspace .section-head p{font-size:12px;color:#71819b;margin:4px 0 0}
+.workspace .paper .metric,.workspace .stat-box{background:#f0f5ff;border:1px solid #e1eaf7;padding:14px;border-radius:12px}
+.workspace .stat-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.workspace .stat-box b{font-size:23px;display:block;color:#1d4d91}
+.workspace .stat-box span{font-size:11px;color:#617793}
+.workspace .cover-note{margin-top:16px;border-left:3px solid #4d84ff;background:#f1f6ff;border-radius:0 9px 9px 0;padding:12px 14px;color:#5878a2;font-size:12px}
+.workspace .btn{border-radius:10px}
+.workspace .btn.outline{border:1px solid #bed0ec;color:#2856a0;background:white}
+.workspace .btn.outline:hover{background:#f2f7ff}
+.workspace>.lab{margin:0;border:1px solid #dce5f2;border-radius:16px;background:#fff;box-shadow:0 13px 38px rgba(22,48,93,.075);overflow:hidden;scroll-margin-top:95px}
+.workspace>.lab>summary{display:flex;align-items:center;flex-wrap:wrap;gap:12px;padding:20px 22px;background:linear-gradient(120deg,#1c417a,#315eaa);color:#fff;font-size:21px;font-weight:750;letter-spacing:-.35px;list-style:none;cursor:pointer}
+.workspace>.lab>summary::-webkit-details-marker{display:none}
+.workspace>.lab>summary::after{content:'⌄';margin-left:auto;color:white;font-size:20px;line-height:1}
+.workspace>.lab[open]>summary::after{content:'⌃'}
+.workspace>.lab>summary .tag{font-size:11px;background:#ffffff28;color:white;border:none;padding:4px 9px;border-radius:30px}
+.workspace>.lab .lab-body{padding:22px}
+.workspace .subsection{margin-top:0;border:none;border-bottom:1px solid #dce5f2;border-radius:0;background:white;box-shadow:none}
+.workspace .subsection>summary{border:none;padding:21px 0;background:white;color:#1b477f;font-size:16px;font-weight:730;cursor:pointer;list-style:none}
+.workspace .subsection>summary::-webkit-details-marker{display:none}
+.workspace .subsection>summary::before{content:'▸';color:#2c64b3;font-size:13px;margin-right:9px}
+.workspace .subsection[open]>summary::before{content:'▾'}
+.workspace .subsection-inner{padding:0 0 21px}
+.workspace .q-card{border:1px solid #e1e9f5;border-radius:12px;padding:15px;margin-bottom:12px;background:#fff}
+.workspace .q-card:last-of-type{margin-bottom:8px}
+.workspace .field>label{font-size:12px;font-weight:750;color:#3c526e}
+.workspace .input{border:1px solid #c9d8ee;border-radius:10px;background:#fff;min-height:43px;padding:10px 12px;color:#1e304c}
+.workspace .input:focus{outline:2px solid #a8caff;border-color:#477ce0}
+.workspace .doc-checks{margin-top:17px;border:1px dashed #abc3e8;background:#f7faff;border-radius:12px;padding:15px}
+.workspace .doc-checks h4{font-size:14px;color:#1e497e}
+.workspace .doc-checks .doc-help{color:#71819b}
+.workspace .doc-item{border-color:#dae7fa;padding:11px 0}
+.workspace .doc-options span{font-size:12px;padding:8px 10px}
+.workspace .doc-options label:has(input:checked) span{background:#eaf3ff;color:#194b98;border-color:#5d96f2}
+.workspace .banner.warn{border-radius:11px;background:#fff7e7;color:#8f661d}
+.workspace .status{border-radius:10px}
+.workspace .toc-mobile{display:none}
+.workspace>.paper.section-intro{padding-top:28px;padding-bottom:28px}
+.workspace>.paper.section-intro .section-head{margin-bottom:0;padding-bottom:0;border-bottom:0}
+.workspace .summary-note{font-size:12px;color:#617793;margin-top:12px}
+@media(max-width:1050px){.layout{grid-template-columns:218px minmax(0,1fr);gap:16px;padding:18px}}
+@media(max-width:900px){.layout{display:block;padding:11px;max-width:850px}.sidebar{display:none}.workspace{gap:12px}.workspace>.paper{padding:17px 14px;border-radius:12px}.workspace .toc-mobile{display:flex;flex-wrap:nowrap;overflow-x:auto;gap:7px;padding:9px 0;margin:0}.workspace .toc-mobile a{white-space:nowrap;background:#e6efff;border-radius:25px;padding:9px 11px;color:#24518b;font-size:12px;text-decoration:none}.workspace>.lab .lab-body{padding:15px 12px}.workspace>.lab>summary{font-size:17px;padding:15px}.workspace>.paper h2,.workspace .section-head h2{font-size:17px}}
+@media(max-width:520px){.topbar{height:59px;min-height:59px;padding:0 13px}.topbar .logo{font-size:15px}.topbar .logo small{display:none}.top-info{max-width:45%;font-size:10px}.document-title{padding:12px 0 15px}.document-title h1{font-size:22px}.workspace .stat-grid{gap:7px}.workspace .stat-box{padding:10px}.workspace .stat-box b{font-size:18px}.workspace .stat-box span{font-size:10px}.workspace .q-card{padding:12px}.doc-options{width:100%}.doc-options label{flex:1}.doc-options span{white-space:nowrap;text-align:center;font-size:10px;padding:9px 5px}.report-tools{flex-wrap:wrap}}
+@media print{body.report-print .workspace{display:none!important}}
+
+
+/* Halaman masuk bergaya prototipe awal: ilustrasi kiri, pilihan kelompok kanan. */
+@media(min-width:901px){
+  .entry{display:grid;grid-template-columns:minmax(260px,.83fr) minmax(0,1fr);gap:19px;align-items:start;max-width:1200px;margin:24px auto 80px}
+  .entry>.entry-hero{grid-column:1;grid-row:1 / span 5;min-height:530px;position:sticky;top:90px;text-align:left;padding:42px 34px;background:linear-gradient(145deg,#173969,#315eaa)}
+  .entry>.entry-hero h1{font-size:clamp(30px,3vw,42px);line-height:1.13;margin:16px 0}
+  .entry>.entry-hero p{font-size:14px;line-height:1.8;color:#dce9fc}
+  .entry>.entry-grid{grid-column:2;grid-template-columns:1fr;gap:15px;margin-top:0!important}
+  .entry>.entry-grid .paper{padding:24px}
+  .entry>.paper,.entry>.banner{grid-column:2}
+  .entry>.banner[style]{grid-column:2}
+}
+@media(max-width:900px){.entry{margin:12px auto 45px}.entry>.entry-grid{grid-template-columns:1fr}}
+
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
 </head>
@@ -151,7 +238,100 @@ function field(label,key,val='',opts=''){return `<div class="field"><label>${h(l
 function textareaField(label,key,val='',scope='school',labId=''){return `<div class="field"><label>${h(label)}</label><textarea class="input" ${scope==='school'?`data-schoolfield="${h(key)}"`:`data-labfield="${h(key)}" data-lab="${h(labId)}"`} placeholder="Tuliskan informasi yang diperoleh...">${h(val)}</textarea></div>`}
 function renderQuestion(q,index){const a=answers[q.id]||{answer:'',note:''};const p=pending.get('answer:'+q.id);const options=CHOICES[q.answer_type];const isText=q.kind==='interview'||q.answer_type==='text'||q.answer_type==='interview';const selection=options?`<select class="input" data-qanswer="${h(q.id)}"><option value="">— Belum dijawab —</option>${options.map(o=>`<option value="${h(o)}" ${a.answer===o?'selected':''}>${h(o)}</option>`).join('')}</select>`:`<textarea class="input" data-qanswer="${h(q.id)}" placeholder="Tulis jawaban yang disampaikan narasumber...">${h(a.answer)}</textarea>`;return `<div class="q" id="question-${h(q.id)}"><div class="row between"><span class="qid">${q.kind==='interview'?'W':index+1}. ${h(q.topic||TYPE_LABELS[q.answer_type]||'Indikator')}</span>${myRole==='leader'?`<span class="row hidden-print"><button class="btn ghost tiny" data-act="edit-q" data-id="${h(q.id)}">Ubah</button><button class="btn danger tiny" data-act="delete-q" data-id="${h(q.id)}">Hapus</button></span>`:''}</div><strong>${h(q.question_text)}</strong><div class="q-fields ${isText?'is-text':''}"><div class="field"><label>${isText?'Jawaban wawancara':'Hasil pengamatan'}</label>${selection}</div><div class="field"><label>${isText?'Catatan tambahan (opsional)':'Catatan pengamatan'}</label><textarea class="input smallarea" data-qnote="${h(q.id)}" placeholder="Catat kondisi, keterangan, atau hal penting...">${h(a.note)}</textarea></div></div>${p?`<div class="q-tools"><span class="tag ${p.conflict?'warning':''}">${p.conflict?'Ada konflik perubahan':'Menunggu sinkronisasi'}</span>${p.conflict?` <button class="btn outline tiny" data-act="resolve" data-key="answer:${h(q.id)}">Tinjau konflik</button>`:''}</div>`:''}</div>`}
 function renderLab(lab,idx){const d=labDetails[lab.id]?.details||{};const area=Number(d.length)>0&&Number(d.width)>0?fmt(Number(d.length)*Number(d.width))+' m²':'Belum diisi';const seats=Number(d.tables)>0&&Number(d.perTable)>0?fmt(Number(d.tables)*Number(d.perTable))+' siswa':'Belum diisi';const lq=questions.filter(q=>q.kind==='observation'&&q.lab_id===lab.id);const completed=lq.filter(answered).length;return `<details class="lab" id="lab-${h(lab.id)}" ${idx===0?'open':''}><summary>${h(lab.lab_name)} <span class="tag" style="margin-left:8px">${completed}/${lq.length} terisi</span></summary><div class="lab-body"><div class="row between"><span class="muted small">Jenis: ${h(lab.lab_type)} ${lab.room_code?' · Kode: '+h(lab.room_code):''}</span>${myRole==='leader'?`<span class="row hidden-print"><button class="btn outline tiny" data-act="edit-lab" data-id="${h(lab.id)}">Ubah nama</button><button class="btn danger tiny" data-act="delete-lab" data-id="${h(lab.id)}">Hapus lab</button></span>`:''}</div><div class="section-head" style="margin-top:20px"><h3>Profil Ruangan dan Kapasitas</h3></div><div class="grid">${field('Panjang ruangan (m)','length',d.length||'','lab|'+lab.id+'|number')}${field('Lebar ruangan (m)','width',d.width||'','lab|'+lab.id+'|number')}${field('Jumlah meja praktikum','tables',d.tables||'','lab|'+lab.id+'|number')}${field('Siswa per meja','perTable',d.perTable||'','lab|'+lab.id+'|number')}${field('Kapasitas maksimal siswa','capacity',d.capacity||'','lab|'+lab.id+'|number')}${field('Letak / gedung / lantai','location',d.location||'','lab|'+lab.id)}</div><div class="grid" style="margin-top:12px"><div class="metric"><span class="small">Luas ruangan dihitung</span><b id="area-${h(lab.id)}">${h(area)}</b></div><div class="metric"><span class="small">Perkiraan tempat berdasarkan meja</span><b id="seats-${h(lab.id)}">${h(seats)}</b></div></div>${SECTIONS.map((section,sIndex)=>{const qs=lq.filter(q=>q.section_key===section.id);return `<details class="subsection" id="section-${h(lab.id)}-${h(section.id)}" ${sIndex===0||sIndex===1?'open':''}><summary>${sIndex+1}. ${h(section.title)} <span style="color:#6983a6;font-weight:500">(${qs.filter(answered).length}/${qs.length})</span></summary><div class="subsection-inner">${qs.length?qs.map((q,j)=>renderQuestion(q,j)).join(''):'<p class="muted small">Belum ada pertanyaan untuk aspek ini.</p>'}${renderDocChecklist(lab.id,section.id)}${myRole==='leader'?`<button class="btn outline tiny hidden-print" style="margin-top:12px" data-act="add-q" data-lab="${h(lab.id)}" data-section="${h(section.id)}">+ Tambah pertanyaan pada aspek ini</button>`:''}</div></details>`}).join('')}${myRole==='leader'&&lq.length===0?`<button class="btn hidden-print" data-act="seed-lab" data-id="${h(lab.id)}" style="margin-top:14px">Isi 22 pertanyaan bawaan</button>`:''}</div></details>`}
-function renderWorkspace(){if(!group)return;const s=stats(),percent=s.all?Math.round(s.done/s.all*100):0;const common=profile.details||{};const docCount=labs.reduce((acc,lab)=>acc+Object.keys(DOCS).reduce((n,k)=>n+DOCS[k].filter((_,i)=>(labDetails[lab.id]?.details||{})[docKey(k,i)]==='Sudah ada').length,0),0);setTopInfo(`${group.group_name} · ${navigator.onLine?'Online':'Offline'}`);const links=[['sekolah','Profil Sekolah'],...labs.map(x=>['lab-'+x.id,x.lab_name]),['wawancara','Wawancara'],['ringkasan','Ringkasan']];const nav=links.map(([anchor,label])=>`<a href="#${h(anchor)}">${h(label)}</a>`).join('');app.innerHTML=`<div class="layout"><aside class="sidebar"><h3>Daftar Isi</h3>${nav}<div class="divider"></div><h3>Anggota</h3>${members.map(m=>`<div class="small" style="margin:6px 0">• ${h(m.display_name)} ${m.member_role==='leader'?'(ketua)':''}</div>`).join('')}<div class="divider"></div><button class="btn outline wide" data-act="back-home">Ganti kelompok</button></aside><main class="workspace"><div class="toc-mobile">${nav}</div><section class="paper" id="sekolah"><div class="row between"><div><span class="eyebrow">LABOBSERVE · INSTRUMEN DIGITAL</span><h1>Observasi Pengelolaan Laboratorium</h1><p class="muted small">${h(group.school_name)} · ${h(group.group_name)} · ${h(group.group_code)}</p></div><span class="tag ${myRole==='leader'?'green':''}">${myRole==='leader'?'Mode Ketua':'Mode Anggota'}</span></div><div class="grid" style="margin:17px 0"><div class="metric"><b>${percent}%</b><span class="small">Checklist pengamatan terisi</span><div class="progress" style="margin-top:7px"><div style="width:${percent}%"></div></div></div><div class="metric"><b>${s.interDone} / ${s.interAll}</b><span class="small">Wawancara terjawab</span></div></div><div class="muted small" style="margin:8px 0 12px">Dokumentasi berstatus sudah ada: ${docCount} item (tanpa unggahan berkas).</div><div id="syncStatus" class="status">Memeriksa status sinkronisasi...</div><div class="row hidden-print" style="margin:11px 0"><button class="btn outline tiny" data-act="reload">↻ Segarkan data</button><button class="btn outline tiny" data-act="backup">⬇ Cadangan JSON</button><button class="btn outline tiny" data-act="report">Pratinjau Laporan PDF</button></div><div class="banner warn">Ini <b>uji cloud</b>, bukan versi final. Data jawaban tersimpan di Supabase setelah status sinkron selesai. PWA offline penuh, Word, dan PowerPoint belum tersedia pada versi ini.</div><div class="section"><div class="section-head"><h3>A. Identitas dan Kebijakan Sekolah (diisi sekali)</h3></div><div class="grid">${field('Tanggal observasi','date',common.date||'')}${field('Jumlah laboratorium di sekolah','schoolLabCount',common.schoolLabCount||'')}${field('Nama narasumber','interviewee',common.interviewee||'')}${field('Jabatan narasumber','interviewRole',common.interviewRole||'')}</div><div style="margin-top:12px">${textareaField('Kebijakan umum pengelolaan laboratorium','policies',common.policies||'')}</div></div></section><section class="paper" id="lab-list"><div class="row between"><div><h2>B. Pengamatan Langsung + Dokumentasi</h2><p class="muted small">Satu instrumen lengkap untuk tiap ruangan, termasuk beberapa lab dengan jenis yang sama.</p></div>${myRole==='leader'?`<button class="btn hidden-print" data-act="add-lab">+ Tambah Lab</button>`:''}</div><p class="muted small">${labs.length} laboratorium tercatat. Pertanyaan bawaan: 22 indikator per laboratorium.</p>${labs.length?'':myRole==='leader'?'<div class="banner">Belum ada laboratorium. Klik Tambah Lab untuk memulai.</div>':'<div class="banner">Ketua belum menambahkan laboratorium.</div>'}</section>${labs.map(renderLab).join('')}<section class="paper" id="wawancara"><div class="row between"><div><h2>C. Pedoman Wawancara</h2><p class="muted small">Wawancara menyatu dalam satu bagian, berlaku bagi pengelolaan sekolah. Bisa mencatat keterangan khusus ruangan pada jawaban.</p></div>${myRole==='leader'?`<button class="btn outline tiny hidden-print" data-act="add-q" data-lab="" data-section="wawancara">+ Pertanyaan</button>`:''}</div>${questions.filter(q=>q.kind==='interview').map(renderQuestion).join('')}${myRole==='leader'&&!questions.some(q=>q.kind==='interview')?'<button class="btn hidden-print" data-act="seed-interviews">Isi 9 pertanyaan bawaan</button>':''}</section><section class="paper" id="ringkasan"><h2>D. Temuan, Kesimpulan, dan Rekomendasi</h2><div class="stack">${textareaField('Temuan utama','findings',common.findings||'')}${textareaField('Kesimpulan','conclusion',common.conclusion||'')}${textareaField('Rekomendasi','recommendations',common.recommendations||'')}</div><div class="banner" style="margin-top:15px">Gunakan tombol Pratinjau Laporan untuk membuat PDF berisi paragraf laporan, bukan cetakan formulir. Berkas foto tidak dilampirkan karena hanya status dokumentasinya yang dicatat.</div></section><div class="footer-action"><span id="footerStatus">${pending.size?'Perubahan menunggu sinkronisasi':'LabObserve terhubung ke cloud'}</span><button class="btn" data-act="reload">Segarkan</button></div></main></div>`;setStatus()}
+function renderWorkspace(){
+ if(!group)return;
+ const s=stats(),percent=s.all?Math.round(s.done/s.all*100):0;
+ const common=profile.details||{};
+ const docCount=labs.reduce((acc,lab)=>acc+Object.keys(DOCS).reduce((n,k)=>n+DOCS[k].filter((_,i)=>(labDetails[lab.id]?.details||{})[docKey(k,i)]==='Sudah ada').length,0),0);
+ setTopInfo(`${group.group_name} · ${navigator.onLine?'Online':'Offline'}`);
+ const labNav=labs.map(l=>`<a class="navlink" href="#lab-${h(l.id)}"><span class="nav-symbol">⚗</span>${h(l.lab_name)}</a>`).join('');
+ const mobileNav=[['sekolah','Identitas Sekolah'],...labs.map(x=>['lab-'+x.id,x.lab_name]),['wawancara','Wawancara'],['ringkasan','Kesimpulan']].map(([id,label])=>`<a href="#${h(id)}">${h(label)}</a>`).join('');
+ app.innerHTML=`<div class="layout">
+ <aside class="sidebar hidden-print">
+   <div class="side-head"><b>Daftar isi</b><span class="tag">${labs.length} lab</span></div>
+   <a class="navlink" href="#sekolah"><span class="nav-symbol">▤</span>Identitas sekolah</a>
+   <div class="navgroup">LABORATORIUM</div>
+   ${labNav}
+   ${myRole==='leader'?`<button class="btn outline wide" data-act="add-lab" style="margin-top:10px;background:#eaf1ff">＋ Tambah laboratorium</button>`:''}
+   <div class="navgroup">WAWANCARA & HASIL</div>
+   <a class="navlink" href="#wawancara"><span class="nav-symbol">♩</span>Wawancara lengkap</a>
+   <a class="navlink" href="#ringkasan"><span class="nav-symbol">✓</span>Kesimpulan & temuan</a>
+   <a class="navlink" href="#ringkasan"><span class="nav-symbol">↓</span>Laporan PDF</a>
+   <div class="side-progress">
+     <div class="row between"><b class="small">Kelengkapan pengisian</b><b>${percent}%</b></div>
+     <div class="progress" style="margin-top:9px"><div style="width:${percent}%"></div></div>
+     <p>${s.done} dari ${s.all} indikator · ${s.interDone}/${s.interAll} wawancara</p>
+   </div>
+   <div class="side-divider"></div>
+   <div class="small" style="color:#71819b;margin-bottom:8px">Anggota: ${members.map(m=>h(m.display_name)).join(', ')||'—'}</div>
+   <button class="btn outline wide" data-act="backup">Cadangkan JSON</button>
+   <button class="btn outline wide" style="margin-top:7px" data-act="back-home">Ganti kelompok</button>
+ </aside>
+ <main class="workspace">
+   <div class="toc-mobile">${mobileNav}</div>
+   <section class="paper" id="sekolah">
+     <div class="document-title"><span class="eyebrow">LABOBSERVE / INSTRUMEN OBSERVASI</span><h1>Observasi Pengelolaan Laboratorium Sekolah</h1><p>Dokumen kolaboratif · Satu halaman panjang · Academic Blue</p></div>
+     <div class="document-divider"></div>
+     <div class="section-head"><div><h2>A. Identitas Sekolah & Kelompok</h2><p>Data umum berlaku untuk seluruh laboratorium yang diamati</p></div><span class="tag">${h(group.group_code)}</span></div>
+     <div class="grid" style="margin-bottom:14px">
+       <div class="field"><label>Nama sekolah</label><input class="input" value="${h(group.school_name)}" readonly></div>
+       <div class="field"><label>Nama kelompok</label><input class="input" value="${h(group.group_name)}" readonly></div>
+       ${field('Tanggal observasi','date',common.date||'')}
+       ${field('Jumlah laboratorium milik sekolah','schoolLabCount',common.schoolLabCount||'')}
+       ${field('Nama narasumber utama','interviewee',common.interviewee||'')}
+       ${field('Jabatan narasumber','interviewRole',common.interviewRole||'')}
+     </div>
+     ${textareaField('Kebijakan umum pengelolaan laboratorium','policies',common.policies||'')}
+     <div class="cover-note">Anggota kelompok dapat mengisi dan memperbarui jawaban bersama melalui Supabase. Ketua dapat mengelola pertanyaan setiap laboratorium. Dokumentasi cukup ditandai status ketersediaannya, tanpa upload.</div>
+     <div class="stat-grid" style="margin-top:16px">
+       <div class="stat-box"><b>${labs.length}</b><span>Ruangan tercatat</span></div>
+       <div class="stat-box"><b>${s.done+s.interDone}</b><span>Jawaban terisi</span></div>
+       <div class="stat-box"><b>${percent}%</b><span>Progres pengamatan</span></div>
+     </div>
+     <div id="syncStatus" class="status" style="margin-top:15px">Memeriksa status sinkronisasi...</div>
+     <div class="row hidden-print" style="margin-top:12px;flex-wrap:wrap">
+       <button class="btn outline tiny" data-act="reload">↻ Segarkan data</button>
+       <button class="btn outline tiny" data-act="backup">⬇ Cadangan JSON</button>
+       <button class="btn tiny" data-act="report">Pratinjau Laporan PDF</button>
+     </div>
+   </section>
+   <section class="paper section-intro" id="lab-list">
+     <div class="section-head"><div><h2>B. Pengamatan Langsung & Dokumentasi</h2><p>Instrumen terpisah untuk setiap ruangan, termasuk beberapa laboratorium dari jenis yang sama</p></div>
+       ${myRole==='leader'?`<button class="btn tiny" data-act="add-lab">＋ Tambah Lab</button>`:''}
+     </div>
+     ${!labs.length?`<p class="muted small" style="margin-top:12px">${myRole==='leader'?'Belum ada laboratorium. Klik Tambah Lab.':'Ketua belum menambahkan laboratorium.'}</p>`:''}
+   </section>
+   ${labs.map(renderLab).join('')}
+   <section class="paper" id="wawancara">
+     <div class="section-head"><div><h2>C. Pedoman Wawancara Lengkap</h2><p>9 pertanyaan inti untuk memperoleh informasi pengelolaan seluruh laboratorium sekolah</p></div>
+       ${myRole==='leader'?`<button class="btn outline tiny hidden-print" data-act="add-q" data-lab="" data-section="wawancara">＋ Pertanyaan</button>`:''}
+     </div>
+     ${questions.filter(q=>q.kind==='interview').map(renderQuestion).join('')}
+     ${myRole==='leader'&&!questions.some(q=>q.kind==='interview')?'<button class="btn" data-act="seed-interviews">Isi 9 pertanyaan bawaan</button>':''}
+   </section>
+   <section class="paper" id="ringkasan">
+     <div class="section-head"><div><h2>D. Rekapitulasi, Temuan, dan Kesimpulan</h2><p>Rangkum hasil pengamatan dan wawancara sebelum membuat laporan</p></div><span class="tag green">Dokumen akhir</span></div>
+     <div class="stat-grid">
+       <div class="stat-box"><b>${labs.length}</b><span>Laboratorium</span></div>
+       <div class="stat-box"><b>${s.done+s.interDone}</b><span>Jawaban terisi</span></div>
+       <div class="stat-box"><b>${docCount}</b><span>Dokumentasi sudah ada</span></div>
+     </div>
+     <div class="stack" style="margin-top:20px">
+       ${textareaField('Temuan penting dari seluruh laboratorium','findings',common.findings||'')}
+       ${textareaField('Kesimpulan','conclusion',common.conclusion||'')}
+       ${textareaField('Rekomendasi perbaikan','recommendations',common.recommendations||'')}
+     </div>
+     <div class="cover-note">PDF akan disusun sebagai laporan naratif (pendahuluan, hasil pengamatan, dokumentasi, wawancara, serta kesimpulan). Bentuknya bukan cetakan halaman website. Pastikan status sinkronisasi selesai sebelum membuat laporan.</div>
+     <div class="row hidden-print" style="margin-top:16px;flex-wrap:wrap">
+       <button class="btn" data-act="report">Pratinjau Laporan PDF</button>
+       <button class="btn outline" data-act="backup">Cadangan JSON</button>
+     </div>
+   </section>
+   <div class="footer-action"><span id="footerStatus">${pending.size?'Perubahan menunggu sinkronisasi':'LabObserve terhubung ke cloud'}</span><button class="btn" data-act="reload">Segarkan</button></div>
+ </main>
+ </div>`;
+ setStatus();
+}
 function openLabModal(id){if(myRole!=='leader')return;const lab=labs.find(x=>x.id===id);showModal(lab?'Ubah Laboratorium':'Tambah Laboratorium',`<form id="labForm" data-id="${h(id||'')}" class="stack"><div class="field"><label>Jenis laboratorium</label><select class="input" name="type">${['Kimia','Biologi','Fisika','IPA Terpadu','Lainnya'].map(x=>`<option ${lab?.lab_type===x?'selected':''}>${x}</option>`).join('')}</select></div><div class="field"><label>Nama ruangan</label><input class="input" name="name" value="${h(lab?.lab_name||'')}" placeholder="Laboratorium Kimia 2" minlength="2" maxlength="150" required></div><div class="field"><label>Kode ruangan (opsional)</label><input class="input" name="roomCode" value="${h(lab?.room_code||'')}" placeholder="Contoh KIM-02"></div><div class="modal-actions"><button type="button" class="btn outline" data-act="close-modal">Batal</button><button type="submit" class="btn">Simpan Laboratorium</button></div></form>`)}
 async function saveLab(form){const f=new FormData(form),id=form.dataset.id,btn=form.querySelector('[type="submit"]');btn.disabled=true;try{const data={lab_type:String(f.get('type')),lab_name:String(f.get('name')).trim(),room_code:String(f.get('roomCode')||'')};let lab;if(id){const r=await db.from('laboratories').update(data).eq('id',id).eq('group_id',group.id).select('*').single();if(r.error)throw r.error;lab=r.data}else{const r=await db.from('laboratories').insert({...data,group_id:group.id,display_order:labs.length+1}).select('*').single();if(r.error)throw r.error;lab=r.data}closeModal();await fetchAll(group.id);restoreQueue();renderWorkspace();if(!id){await seedLabQuestions(lab.id)}else notify('Perubahan nama laboratorium tersimpan.','good')}catch(e){showError(e,'Gagal menyimpan laboratorium: ')}finally{btn.disabled=false}}
 async function seedLabQuestions(labId){if(myRole!=='leader')return;const existing=questions.filter(x=>x.lab_id===labId);if(existing.length){notify('Laboratorium sudah memiliki pertanyaan. Tidak ditambahkan ulang.');return}const rows=SECTIONS.flatMap((section,sIndex)=>section.questions.map(([text,type],i)=>({group_id:group.id,lab_id:labId,kind:'observation',section_key:section.id,topic:section.title,question_text:text,answer_type:type,display_order:sIndex*100+i,is_default:true})));const r=await db.from('questions').insert(rows);if(r.error){showError(r.error,'Lab dibuat, tetapi pertanyaan bawaan gagal ditambahkan: ');return}await reloadData(true);notify('22 indikator bawaan ditambahkan.','good')}
